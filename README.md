@@ -1,10 +1,21 @@
 # Spam Detector Network
 
+## Table of Contents
+1. [Project Description](#project-description)
+2. [Project Structure](#project-structure)
+3. [Model Characteristics](#model-characteristics)
+4. [Tools and Technologies Used](#tools-and-technologies-used)
+5. [Conclusion](#conclusion)
+6. [Authors](#authors)
+
 ## Project Description
 
-In 2023, nearly 45.6% of all emails worldwide were identified as spam, down from almost 49% in 2022. While remaining a significant part of email traffic, the spam email share has decreased significantly since 2011. In 2023, the highest volume of spam emails was recorded in May, accounting for about 50% of global email traffic. For further details, visit [Statista](https://www.statista.com/statistics/420400/spam-email-traffic-share-annual/).
+In 2023, nearly 45.6% of all emails worldwide were identified as spam, down from almost 49% in 2022. Despite the decrease, spam remains a significant concern in email communication. The project focuses on building a robust spam email detection system using deep learning techniques, with a particular emphasis on leveraging a pre-trained BERT model.
 
-The project aims to build a spam email detection system using deep learning techniques, with a particular focus on Long Short-Term Memory (LSTM) and the BERT framework.
+### Preprocessing Steps:
+- **Tokenization**: Breaking down emails into individual words or tokens.
+- **Stemming**: Reducing words to their root forms to normalize text.
+- **Other Text Transformations**: Additional preprocessing steps were applied to enhance the quality of input data.
 
 ## Project Structure
 
@@ -18,59 +29,52 @@ The project aims to build a spam email detection system using deep learning tech
 
 #### Data Collection
 
-- Gathering a comprehensive dataset of emails labeled as spam and non-spam.
+- A comprehensive dataset of labeled emails (spam and non-spam) was gathered from the Enron Spam Dataset.
 
 #### Data Preprocessing
 
-- Removing stop words, stemming, and lemmatization.
-- Transforming email text into numerical features using techniques like TF-IDF or embedding.
+- Emails underwent preprocessing steps including tokenization, stemming, and other text transformations to prepare them for model training.
 
 #### Model Building
 
-- Using PyTorch framework and BERT model for deep learning.
-- Fine-tuning BERT for email classification tasks.
+- Utilized a pre-trained BERT (Bidirectional Encoder Representations from Transformers) model.
+- Fine-tuned the pre-trained BERT model by training the last few fully connected layers.
 
 #### Training and Validation
 
-- Training the model on a training set and validating it on a test set.
-- Utilizing cross-validation techniques to enhance model robustness.
+- The model was trained on a training set and validated on a separate test set to assess its performance.
 
 #### Performance Evaluation
 
-- Evaluating the model using metrics such as accuracy, precision, recall, and F1-score.
-- Analyzing false positives and false negatives to improve the model.
+- Evaluated the model's performance using standard metrics such as accuracy, precision, recall, and F1-score.
+- Analyzed false positives and false negatives to identify areas for improvement.
 
 #### Deployment and Monitoring
 
-- Implementing the model in a production environment.
-- Monitoring model performance and collecting feedback for further enhancements.
-
-#### Update and Maintenance
-
-- Regularly updating the model with new data and techniques.
-- Continuous maintenance to ensure long-term effectiveness.
+- Deployed the trained model in a production environment for real-time spam detection.
+- Implemented monitoring mechanisms to track model performance and gather feedback for continuous improvement.
 
 ## Model Characteristics
 
-- **High Accuracy and Precision**: Correctly classifying the maximum number of emails as spam or non-spam.
-- **Low False Positive and False Negative Rates**: Minimizing user inconvenience and improving security.
-- **Generalization Capability**: Effective operation on new emails.
-- **Scalability**: Handling large volumes of emails in real-time.
-- **Updateability**: Adaptation to changes in spam behavior.
-- **Robustness Against Evasion Attacks**: Resistance to spammer evasion techniques.
-- **Ability to Learn from Diverse Sources**: Integration of data from various sources and contexts.
-- **Transparency and Interpretability**: Ability to interpret model decisions.
-- **Customization**: Adaptability to specific user or organizational needs.
-- **Compatibility and Integration**: Easy integration with existing email systems.
-- **Computational Efficiency**: Real-time operation without slowdowns.
-- **Multilingual Support**: Recognition and classification of spam in multiple languages.
+- **High Accuracy and Precision**: The model aims to accurately classify emails as spam or non-spam with minimal errors.
+- **Robustness**: The model should be able to handle various types of spam emails and adapt to changes in spamming techniques.
+- **Efficiency**: Real-time processing capabilities are crucial to ensure timely spam detection without significant delays.
+- **Generalization**: The model should generalize well to unseen data, ensuring consistent performance in different email environments.
 
 ## Tools and Technologies Used
 
-- **PyTorch**: Deep learning framework for model implementation.
-- **BERT (Bidirectional Encoder Representations from Transformers)**: Pre-trained model for natural language processing tasks.
-- **Node RED**: Integration tool for the second part of the project.
+- **PyTorch**: Utilized for deep learning model development and training.
+- **BERT (Bidirectional Encoder Representations from Transformers)**: Leveraged a pre-trained BERT model for natural language understanding tasks.
+- **Google Colab**: Used Colab, a cloud-based Jupyter notebook environment, for model development and training.
 
 ## Conclusion
 
-A predictive model for spam detection must combine high accuracy, scalability, robustness, and updateability to address the continuous evolution of spam techniques. Developing such a model requires careful attention to technical, operational, and security details.
+Building an effective spam email detection system requires a combination of advanced deep learning techniques, thorough data preprocessing, and rigorous model evaluation. By leveraging pre-trained models like BERT and fine-tuning them for specific tasks, we can develop robust solutions capable of combating spam effectively.
+
+## Authors
+
+- Leonardo Catello
+- Lorenzo Manco
+- Aurora D’Ambrosio
+
+We would like to express our gratitude to the creator of the Enron Spam Dataset for providing valuable data for our project.
