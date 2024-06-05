@@ -80,4 +80,4 @@ Building an effective spam email detection system requires a combination of adva
 This project is licensed under the [GNU General Public License v3.0]. Refer to the LICENSE file for more information.
 
 ## Acknowledgment
-We would like to express our gratitude to [Marcel Wiechmann](#https://github.com/MWiechmann) the creator of the Enron Spam Dataset for providing valuable data for our project.
+We would like to express our gratitude to [Marcel Wiechmann](https://github.com/MWiechmann) the creator of the Enron Spam Dataset for providing valuable data for our project.
