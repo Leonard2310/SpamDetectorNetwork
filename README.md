@@ -78,4 +78,4 @@ Building an effective spam email detection system requires a combination of adva
 - Aurora D’Ambrosio
 
 ## Acknowledgment
-We would like to express our gratitude to [Marcel Wiechmann](#) the creator of the Enron Spam Dataset for providing valuable data for our project.
+We would like to express our gratitude to [Marcel Wiechmann](#https://github.com/MWiechmann) the creator of the Enron Spam Dataset for providing valuable data for our project.
