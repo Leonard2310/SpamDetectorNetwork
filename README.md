@@ -72,10 +72,12 @@ In 2023, nearly 45.6% of all emails worldwide were identified as spam, down from
 Building an effective spam email detection system requires a combination of advanced deep learning techniques, thorough data preprocessing, and rigorous model evaluation. By leveraging pre-trained models like BERT and fine-tuning them for specific tasks, we can develop robust solutions capable of combating spam effectively.
 
 ## Authors
+- [Leonardo Catello](https://github.com/Leonard2310) 
+- [Lorenzo Manco](https://github.com/Rasbon99) 
+- [Aurora D'Ambrosio](https://github.com/)
 
-- Leonardo Catello
-- Lorenzo Manco
-- Aurora D’Ambrosio
+## License
+This project is licensed under the [GNU General Public License v3.0]. Refer to the LICENSE file for more information.
 
 ## Acknowledgment
 We would like to express our gratitude to [Marcel Wiechmann](#https://github.com/MWiechmann) the creator of the Enron Spam Dataset for providing valuable data for our project.
