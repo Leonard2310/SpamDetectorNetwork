@@ -1,0 +1,280 @@
+[
+    {
+        "id": "cf0a3e9084c1f784",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "782822981002a034",
+        "type": "e-mail in",
+        "z": "cf0a3e9084c1f784",
+        "name": "",
+        "protocol": "IMAP",
+        "server": "imap.gmail.com",
+        "useSSL": true,
+        "autotls": "never",
+        "port": "993",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "box": "INBOX",
+        "disposition": "Read",
+        "criteria": "UNSEEN",
+        "repeat": "3000",
+        "fetch": "auto",
+        "inputs": 0,
+        "x": 690,
+        "y": 320,
+        "wires": [
+            [
+                "1987088a7fab8635"
+            ]
+        ]
+    },
+    {
+        "id": "22c8552f8693ecfd",
+        "type": "e-mail",
+        "z": "cf0a3e9084c1f784",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "leonardo.catello23@gmail.com",
+        "dname": "",
+        "x": 1330,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "1987088a7fab8635",
+        "type": "debug",
+        "z": "cf0a3e9084c1f784",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "b933e3b7c7b30a8d",
+        "type": "switch",
+        "z": "cf0a3e9084c1f784",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1090,
+        "y": 180,
+        "wires": [
+            [
+                "22c8552f8693ecfd"
+            ],
+            [
+                "bd3d72b194afec91"
+            ]
+        ]
+    },
+    {
+        "id": "bd3d72b194afec91",
+        "type": "change",
+        "z": "cf0a3e9084c1f784",
+        "name": "SPAM",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "SPAM INDIVIDUATO",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1270,
+        "y": 280,
+        "wires": [
+            [
+                "8dabeb165a83d2f1"
+            ]
+        ]
+    },
+    {
+        "id": "8dabeb165a83d2f1",
+        "type": "debug",
+        "z": "cf0a3e9084c1f784",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1420,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "e1f3d5c3.43f22",
+        "type": "inject",
+        "z": "cf0a3e9084c1f784",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"prompt\": \"Genera una mail spam\"}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 160,
+        "wires": [
+            [
+                "b16e2f2b.d9d62"
+            ]
+        ]
+    },
+    {
+        "id": "b16e2f2b.d9d62",
+        "type": "http request",
+        "z": "cf0a3e9084c1f784",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://localhost:5000/generate",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 410,
+        "y": 160,
+        "wires": [
+            [
+                "d527c176d8f273ed"
+            ]
+        ]
+    },
+    {
+        "id": "2499d40c61534f50",
+        "type": "inject",
+        "z": "cf0a3e9084c1f784",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"prompt\": \"Genera una mail lavorativa\"}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 220,
+        "wires": [
+            [
+                "fc6e261f4fbded43"
+            ]
+        ]
+    },
+    {
+        "id": "fc6e261f4fbded43",
+        "type": "http request",
+        "z": "cf0a3e9084c1f784",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://localhost:5000/generate",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 410,
+        "y": 220,
+        "wires": [
+            [
+                "d527c176d8f273ed"
+            ]
+        ]
+    },
+    {
+        "id": "d527c176d8f273ed",
+        "type": "tf-model",
+        "z": "cf0a3e9084c1f784",
+        "modelURL": "",
+        "outputNode": "",
+        "name": "",
+        "x": 650,
+        "y": 180,
+        "wires": [
+            [
+                "d754a9281c5947be"
+            ]
+        ]
+    },
+    {
+        "id": "d754a9281c5947be",
+        "type": "tf-function",
+        "z": "cf0a3e9084c1f784",
+        "name": "tf-function 1",
+        "func": "const tf = require('@tensorflow/tfjs-node');\n\nasync function predict_with_tf_model(msg) {\n    try {\n        // Ottieni il modello TensorFlow passato dal nodo tf-model\n        const model = msg.model;\n\n        // Normalizza i dati di input, se necessario\n        // Esempio: msg.payload = normalize_data(msg.payload);\n\n        // Effettua le predizioni\n        const inputTensor = tf.tensor(msg.payload); // Assicurati che msg.payload sia nella forma corretta richiesta dal modello\n        const predictions = model.predict(inputTensor);\n\n        // Converti le predizioni in array JavaScript\n        const predictionsArray = await predictions.array();\n\n        // Estrai la label predetta (1 o 0)\n        const predictedLabel = predictionsArray[0] >= 0.5 ? 1 : 0;\n\n        // Ritorna la label predetta\n        return predictedLabel;\n    } catch (error) {\n        // Gestisci eventuali errori\n        console.error('Errore durante la predizione:', error);\n        return null;\n    }\n}\n\nreturn predict_with_tf_model(msg);\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 180,
+        "wires": [
+            [
+                "b933e3b7c7b30a8d"
+            ]
+        ]
+    }
+]
