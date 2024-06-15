@@ -31,7 +31,7 @@ nltk.download('wordnet')
 nltk.download('omw-1.4')
 
 # Define the model directory
-MODEL_DIR = '/Users/l.catello/Library/Mobile Documents/com~apple~CloudDocs/Magistrale Ingegneria Informatica/Cognitive and Computing System/SpamDetection/Model/'
+MODEL_DIR = 'model_directory'
 
 # Initialize Flask app
 app = Flask(__name__)
