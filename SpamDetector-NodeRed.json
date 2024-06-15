@@ -1,0 +1,235 @@
+[
+    {
+        "id": "ac5dd1c084cd341e",
+        "type": "tab",
+        "label": "Spam-Detector Flow",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "4a32ff3a24c2ab6a",
+        "type": "e-mail in",
+        "z": "ac5dd1c084cd341e",
+        "name": "E-Mail Receiver",
+        "protocol": "IMAP",
+        "server": "imap.gmail.com",
+        "useSSL": true,
+        "autotls": "never",
+        "port": "993",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "box": "INBOX",
+        "disposition": "Read",
+        "criteria": "UNSEEN",
+        "repeat": "10",
+        "fetch": "auto",
+        "inputs": 0,
+        "x": 480,
+        "y": 400,
+        "wires": [
+            [
+                "3c2823566d33f566"
+            ]
+        ]
+    },
+    {
+        "id": "bbc9c20c3d411536",
+        "type": "e-mail",
+        "z": "ac5dd1c084cd341e",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "leonardo.catello23@gmail.com",
+        "dname": "E-Mail Sender",
+        "x": 1080,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "3c2823566d33f566",
+        "type": "debug",
+        "z": "ac5dd1c084cd341e",
+        "name": "Console E-Mail",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "4f7d66bf72739688",
+        "type": "change",
+        "z": "ac5dd1c084cd341e",
+        "name": "Spam Warning",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Spam Detected!",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1080,
+        "y": 100,
+        "wires": [
+            [
+                "66222f6a0dfbf9aa"
+            ]
+        ]
+    },
+    {
+        "id": "66222f6a0dfbf9aa",
+        "type": "debug",
+        "z": "ac5dd1c084cd341e",
+        "name": "Console Mail Spam",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1290,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "8083e7fee63b1627",
+        "type": "inject",
+        "z": "ac5dd1c084cd341e",
+        "name": "Mail",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{   \"text\": \"Objet: Réunion Urgente - Nouvelle Stratégie de Marketing\\n\\nCher Paul Durand,\\n\\nJ'espère que vous allez bien. Nous avons une réunion urgente concernant notre nouvelle stratégie de marketing. Votre présence est indispensable.\\n\\n**Détails de la réunion :**\\n- **Date :** 20 juin 2024\\n- **Heure :** 10h00\\n- **Lieu :** Salle de conférence B\\n\\nOrdre du jour :\\n1. Présentation de la nouvelle stratégie de marketing.\\n2. Analyse des données du marché.\\n3. Planification des prochaines étapes.\\n4. Questions et réponses.\\n\\nVeuillez confirmer votre présence dès que possible.\\n\\nMerci pour votre collaboration.\\n\\nCordialement,\\nMarie Lefèvre\\nResponsable Marketing\\n[Nom de l'entreprise]\\n\\n---\\n**Note :** Ce message est destiné uniquement aux destinataires mentionnés et peut contenir des informations confidentielles. Si vous avez reçu ce message par erreur, veuillez le supprimer immédiatement et en informer l'expéditeur.\\n\\n---\\n**© 2024 Tous droits réservés.**\" }",
+        "payloadType": "json",
+        "x": 130,
+        "y": 120,
+        "wires": [
+            [
+                "1da5901a410f231e"
+            ]
+        ]
+    },
+    {
+        "id": "1da5901a410f231e",
+        "type": "http request",
+        "z": "ac5dd1c084cd341e",
+        "name": "Prediction",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://localhost:8080/predict",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 380,
+        "y": 180,
+        "wires": [
+            [
+                "2926d29f.0b8bb2"
+            ]
+        ]
+    },
+    {
+        "id": "a1721bc6bd52dc72",
+        "type": "inject",
+        "z": "ac5dd1c084cd341e",
+        "name": "Spam",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{   \"text\": \"Ciao, stavo cercando in giro su Internet risorse utili e ho trovato il tuo sito web. Ho pensato che avrebbe senso scambiare dei link con il tuo sito. Il mio sito web è una risorsa eccezionale di informazioni su artrite, glucosamina e dolore articolare. Questo sito informativo non vende nulla, ma cerca piuttosto di educare il pubblico sull'artrite e di descrivere quanto alcune cose come i farmaci COX-2 possano essere fatali. Ci sono letteralmente centinaia di articoli, ricerche cliniche, un forum di discussione e spiegazioni semplici dei risultati scientifici da esplorare. Fammi sapere quando avrai inserito il tuo link e io inserirò il tuo nel categoria di tua scelta entro 24 ore. Per risparmiarti tempo, ho creato un link di esempio e incluso il codice HTML qui sotto:  Il dolore articolare è qualcosa che nessuno dovrebbe dover sopportare. Fortunatamente, l'informazione è potere. Esplora il Centro di Glucosamina e Artrite per le ultime informazioni su glucosamina, artrite e dolore articolare. Leggi centinaia di articoli, riassunti in plain English di prove cliniche, post nel forum e altro ancora.  In salute, Tripp Reynolds tripp@glucosamine-arthritis.org http://www.glucosamine-arthritis.org P.O. Box 3388 Chapel Hill, NC 27514  P.S. Se questa email è stata ricevuta per errore, ti chiedo scusa. Se puoi inoltrarla alla persona corretta, te ne sarei grato. Infine, se non desideri che io ti segua ulteriormente, fammelo sapere e non ti disturberò più riguardo a questo.\"}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 240,
+        "wires": [
+            [
+                "1da5901a410f231e"
+            ]
+        ]
+    },
+    {
+        "id": "2926d29f.0b8bb2",
+        "type": "function",
+        "z": "ac5dd1c084cd341e",
+        "name": "Process Prediction",
+        "func": "var prediction = msg.payload.prediction;\nvar text = msg.payload.text;\n\n// Aggiungi il campo text al messaggio\nmsg.text = text;\n\n// Check se la predizione è 1 o 0\nif (prediction === 1) {\n    msg.payload = \"Prediction is 1\";\n} else if (prediction === 0) {\n    msg.payload = text;\n} else {\n    msg.payload = \"Invalid prediction value\";\n}\n\n// Restituisci il messaggio aggiornato\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 180,
+        "wires": [
+            [
+                "7ee982b1.1f0af4"
+            ]
+        ]
+    },
+    {
+        "id": "7ee982b1.1f0af4",
+        "type": "switch",
+        "z": "ac5dd1c084cd341e",
+        "name": "Switch on Prediction",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Prediction is 1",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 820,
+        "y": 180,
+        "wires": [
+            [
+                "4f7d66bf72739688"
+            ],
+            [
+                "bbc9c20c3d411536"
+            ]
+        ]
+    }
+]
