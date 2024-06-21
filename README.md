@@ -74,7 +74,7 @@ Building an effective spam email detection system requires a combination of adva
 ## Authors
 - [Leonardo Catello](https://github.com/Leonard2310) 
 - [Lorenzo Manco](https://github.com/Rasbon99) 
-- [Aurora D'Ambrosio](https://github.com/)
+- [Aurora D'Ambrosio](https://github.com/AuroraD-99)
 
 ## License
 This project is licensed under the [GNU General Public License v3.0]. Refer to the LICENSE file for more information.
