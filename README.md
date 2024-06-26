@@ -7,6 +7,8 @@
 4. [Tools and Technologies Used](#tools-and-technologies-used)
 5. [Conclusion](#conclusion)
 6. [Authors](#authors)
+7. [License](#license)
+8. [Acknowledgment](#acknowledgment)
 
 ## Project Description
 
@@ -54,6 +56,16 @@ In 2023, nearly 45.6% of all emails worldwide were identified as spam, down from
 - Deployed the trained model in a production environment for real-time spam detection.
 - Implemented monitoring mechanisms to track model performance and gather feedback for continuous improvement.
 
+### File Structure
+
+- `SpamDetectionNetwork.ipynb`: Jupyter notebook containing the model development and training code.
+- `Prediction-Server.py`: Python script to set up a server for real-time spam prediction.
+- `SpamDetector-NodeRed.json`: Configuration file for Node-RED to facilitate integration and deployment.
+- `Model/`: Directory containing the saved model files.
+  - `saved_model.pb`: The saved TensorFlow model.
+  - `variables/`: Directory containing model variables.
+- `SpamDetection-Team01.pdf`: Project report detailing the methodologies and findings.
+
 ## Model Characteristics
 
 - **High Accuracy and Precision**: The model aims to accurately classify emails as spam or non-spam with minimal errors.
@@ -66,14 +78,16 @@ In 2023, nearly 45.6% of all emails worldwide were identified as spam, down from
 - **PyTorch**: Utilized for deep learning model development and training.
 - **BERT (Bidirectional Encoder Representations from Transformers)**: Leveraged a pre-trained BERT model for natural language understanding tasks.
 - **Google Colab**: Used Colab, a cloud-based Jupyter notebook environment, for model development and training.
+- **Node-RED**: A flow-based development tool for visual programming, used for integration and deployment.
+- **TensorFlow**: Used for saving and deploying the trained model.
 
 ## Conclusion
 
 Building an effective spam email detection system requires a combination of advanced deep learning techniques, thorough data preprocessing, and rigorous model evaluation. By leveraging pre-trained models like BERT and fine-tuning them for specific tasks, we can develop robust solutions capable of combating spam effectively.
 
 ## Authors
-- [Leonardo Catello](https://github.com/Leonard2310) 
-- [Lorenzo Manco](https://github.com/Rasbon99) 
+- [Leonardo Catello](https://github.com/Leonard2310)
+- [Lorenzo Manco](https://github.com/Rasbon99)
 - [Aurora D'Ambrosio](https://github.com/AuroraD-99)
 
 ## License
