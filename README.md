@@ -4,13 +4,15 @@
 1. [Project Description](#project-description)
 2. [Project Structure](#project-structure)
 3. [Model Characteristics](#model-characteristics)
-4. [Tools and Technologies Used](#tools-and-technologies-used)
-5. [Server Setup and Deployment](#server-setup-and-deployment)
-6. [Node-RED Workflow](#node-red-workflow)
-7. [Conclusion](#conclusion)
-8. [Authors](#authors)
-9. [License](#license)
-10. [Acknowledgment](#acknowledgment)
+4. [Data Preprocessing](#data-preprocessing)
+5. [Model Training and Evaluation](#model-training-and-evaluation)
+6. [Tools and Technologies Used](#tools-and-technologies-used)
+7. [Server Setup and Deployment](#server-setup-and-deployment)
+8. [Node-RED Workflow](#node-red-workflow)
+9. [Conclusion](#conclusion)
+10. [Authors](#authors)
+11. [License](#license)
+12. [Acknowledgment](#acknowledgment)
 
 ---
 
@@ -18,7 +20,14 @@
 
 In 2023, approximately 45.6% of global emails were identified as spam, marking a decrease from nearly 49% in 2022. Despite this decline, spam remains a critical issue in email communications. This project focuses on developing an effective spam email detection system using deep learning techniques, with a particular emphasis on leveraging a pre-trained DistilBERT model.
 
-### Preprocessing Steps:
+### Project Objectives
+
+- **Developing a Robust Model**: Utilize state-of-the-art deep learning models for accurate classification of spam and non-spam emails.
+- **Efficiency in Processing**: Implement efficient preprocessing steps to handle large volumes of email data.
+- **Real-Time Detection**: Deploy the model for real-time spam detection in email systems.
+- **Integration with Node-RED**: Integrate the spam detection model with Node-RED for seamless workflow automation.
+
+### Preprocessing Steps
 
 1. **Data Reading and Integration**:
    - Reads email data from a CSV file.
@@ -80,64 +89,69 @@ These preprocessing steps are crucial to standardize, clean, and optimize input 
 
 The project selected DistilBERT for its efficient training capabilities and reduced size. Customized model architecture replaced final classification layer with ReLU activation, Dropout for regularization, and linear layer for binary classification. Frozen feature extraction retained pre-trained weights for focused fine-tuning.
 
-## Data Loader
+## Data Preprocessing
+
+### Handling Multilingual Content
+
+- **Translation**: Utilized `googletrans` for translating non-English text to English, ensuring uniform processing and analysis across different languages.
+
+### Tokenization and Cleaning
+
+- **Tokenization**: Employed DistilBERT's tokenizer to tokenize text efficiently, ensuring compatibility with model input requirements.
+- **Cleaning**: Removed non-alphanumeric characters, stopwords, and performed lemmatization to enhance data quality.
+
+### Data Loader
 
 Implemented `DistilBERTDataset` class for handling input during model training and validation. Utilized DistilBERT tokenizer for tokenization, padding, and truncation, preprocessing CSV data efficiently via PyTorch's DataLoader with multiprocessing support.
 
-## Training with Validation
+## Model Training and Evaluation
 
-Training entailed epochs processing batches, computing outputs, calculating loss against true labels, and optimizing via backpropagation using AdamW optimizer. Validation post each epoch assessed model on separate dataset, saving best weights by validation accuracy and loss, employing CrossEntropyLoss and learning rate scheduling.
+### Training Process
+
+- Utilized AdamW optimizer for training with CrossEntropyLoss as the loss function.
+- Monitored training progress through epochs, saving best model weights based on validation accuracy and loss.
+
+### Validation and Testing
+
+- Validated model performance on a separate test dataset to ensure generalizability and accuracy.
+- Evaluated metrics such as precision, recall, and F1-score to assess model effectiveness in spam detection.
 
 ## Tools and Technologies Used
 
-- PyTorch: For developing and training deep learning models, focusing on natural language understanding tasks.
-- DistilBERT: Leveraged pre-trained model for efficient text classification.
-- Pandas and NumPy: For data manipulation, preprocessing structured data from CSVs.
-- Matplotlib: For visualizing training progress, model evaluation metrics.
-- Google Colab: Cloud-based Jupyter environment for collaborative model development, GPU resource utilization.
-- Node-RED: Flow-based tool for visual programming, data flow, and integration tasks, handling HTTP POST for model predictions.
-- Flask: Integrated for local server, facilitating Node-RED HTTP POST to predict model. Flask eases API endpoint ML model hosting, deployment.
-- TensorFlow: For saving, exporting trained model, ensuring deployment compatibility.
+- **Deep Learning Framework**: PyTorch for developing and training deep learning models.
+- **Model Architecture**: DistilBERT for efficient text classification tasks.
+- **Data Handling**: Pandas and NumPy for data manipulation and preprocessing.
+- **Visualization**: Matplotlib for visualizing training progress and model evaluation metrics.
+- **Collaborative Development**: Google Colab for cloud-based Jupyter environment and GPU utilization.
+- **Deployment**: Node-RED for workflow automation and integration, Flask for creating API endpoints.
 
 ## Server Setup and Deployment
 
-### Installing Necessary Packages
+### Setting Up Prediction Server
 
-Ensure required package installation: uninstall existing TensorFlow, install project-specific TensorFlow version, 'langdetect', 'googletrans', 'transformers' dependencies.
+- Implemented Flask application for hosting the trained model, enabling real-time predictions via HTTP requests.
+- Utilized Docker for containerization, ensuring portability and scalability of the prediction server.
 
-### Initializing Flask App and Loading Model
+### Monitoring and Maintenance
 
-Flask use for lightweight WSGI Python web app framework, model load via specific options, optimizing compatibility, performance.
-
-### Text Translation, Preprocessing
-
-Multi-language email handling: detect, translate to English via 'langdetect', 'googletrans'. Text preprocessing incl. tokenization, cleaning, lemmatization ready email content prediction.
-
-### Defining Prediction Route
-
-Flask app route setup for prediction request: process incoming, preprocess email text, predict via loaded TensorFlow model, JSON format return prediction result.
+- Integrated monitoring tools to track model performance and server uptime, ensuring continuous operation and reliability.
+- Implemented logging mechanisms to capture errors and user interactions for troubleshooting and improvement.
 
 ## Node-RED Workflow
 
-### Workflow Overview
+### Workflow Integration
 
-Node-RED facilitates email service, spam detection integration workflow. Components retrieve emails, send predictions Flask, process, action based prediction.
+- Developed Node-RED flows to automate email processing and spam detection.
+- Integrated with IMAP servers for retrieving emails, processing through Flask API for prediction, and routing based on spam classification.
 
-### Key Components
+### Real-Time Decision Making
 
-1. **Email Receiver**: Regularly retrieves IMAP server emails.
-2. **HTTP Request**: Send email content Flask server spam prediction.
-3. **Process Prediction**: Response process Flask server determine action.
-4. **Switch on Prediction**: Workflow directs based prediction.
-5. **Spam Warning, Email Sender**: Warning send, process email prediction.
-
-### Example Workflow
-
-Triggered manually or automatically, handle incoming emails, predict, action spam warning, non-spam email forward.
+- Configured decision-making nodes to classify emails as spam or non-spam based on model predictions.
+- Automated responses for spam emails, ensuring efficient email management and user communication.
 
 ## Conclusion
 
-Spam Detector Network project encompasses comprehensive approach build, deploy spam detection system, advanced machine learning, Flask, Node-RED. System robust, efficient, real-time email spam detection capable.
+Spam Detector Network project encompasses a comprehensive approach to building and deploying a spam detection system using advanced machine learning techniques. The integration with Node-RED enhances automation capabilities, making it suitable for real-time email spam detection and management.
 
 ## Authors
 
@@ -147,8 +161,8 @@ Spam Detector Network project encompasses comprehensive approach build, deploy s
 
 ## License
 
-This project licensed under [GNU General Public License v3.0](LICENSE). Reference LICENSE file for more information.
+This project is licensed under the [GNU General Public License v3.0](LICENSE). Refer to the LICENSE file for more information.
 
 ## Acknowledgment
 
-Gratitude to [Marcel Wiechmann](https://github.com/MWiechmann), Enron Spam Dataset creator, providing valuable project data.
+Gratitude to [Marcel Wiechmann](https://github.com/MWiechmann), creator of the Enron Spam Dataset, for providing valuable data for this project.
