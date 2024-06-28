@@ -10,9 +10,10 @@
 7. [Server Setup and Deployment](#server-setup-and-deployment)
 8. [Node-RED Workflow](#node-red-workflow)
 9. [Conclusion](#conclusion)
-10. [Authors](#authors)
-11. [License](#license)
-12. [Acknowledgment](#acknowledgment)
+10. [Future Proposals](#future-proposals)
+11. [Authors](#authors)
+12. [License](#license)
+13. [Acknowledgment](#acknowledgment)
 
 ---
 
@@ -26,27 +27,6 @@ In 2023, approximately 45.6% of global emails were identified as spam, marking a
 - **Efficiency in Processing**: Implement efficient preprocessing steps to handle large volumes of email data.
 - **Real-Time Detection**: Deploy the model for real-time spam detection in email systems.
 - **Integration with Node-RED**: Integrate the spam detection model with Node-RED for seamless workflow automation.
-
-### Preprocessing Steps
-
-1. **Data Reading and Integration**:
-   - Reads email data from a CSV file.
-   - Merges 'Subject' and 'Message' columns into a unified 'Text' column for streamlined text processing.
-
-2. **Label Encoding**:
-   - Converts categorical labels ('Spam' and 'Ham') into binary format (1 for 'spam', 0 for 'ham') to facilitate classification.
-
-3. **Data Cleaning and Handling**:
-   - Removes unnecessary columns like 'Date', 'Subject', and 'Message ID' to simplify the dataset.
-   - Handles missing values to ensure data completeness.
-
-4. **Text Preprocessing**:
-   - Translates non-English text to English using automated translation.
-   - Cleans text by removing non-alphanumeric characters and other noise.
-   - Tokenizes text using DistilBERT tokenizer for natural language processing.
-   - Removes stopwords and lemmatizes tokens for improved analysis.
-
-These preprocessing steps are crucial to standardize, clean, and optimize input data for subsequent machine learning model training and analysis, specifically for classifying emails as spam or non-spam.
 
 ## Project Structure
 
@@ -62,18 +42,18 @@ These preprocessing steps are crucial to standardize, clean, and optimize input 
 
 ### Training and Validation
 
-- Frozen feature extraction layers of DistilBERT model.
-- Trained classification layer on training set, validated on separate test set for performance assessment.
+- Hyperparameters tuned through validation set to find optimal settings.
+- Combined training and validation sets for final model training to minimize overfitting and maximize performance.
 
 ### Performance Evaluation
 
-- Evaluated model using metrics like loss and accuracy.
-- Utilized plots for visualizing training progress and results.
+- Evaluated model using metrics like accuracy, precision, recall, and F1-score.
+- Achieved an accuracy of 97% with strong recall, indicating minimal false positives and false negatives.
 
 ### Deployment and Monitoring
 
 - Deployed trained model in production for real-time spam detection.
-- Implemented monitoring to track model performance and gather feedback.
+- Monitored model performance and server uptime for reliability.
 
 ### File Structure
 
@@ -83,7 +63,6 @@ These preprocessing steps are crucial to standardize, clean, and optimize input 
 - `Model/`: Directory containing saved model files.
   - `saved_model.pb`: TensorFlow model file.
   - `variables/`: Directory for model variables.
-- `SpamDetection-Team01.pdf`: Project report detailing methodologies and findings.
 
 ## Model Characteristics
 
@@ -91,14 +70,22 @@ The project selected DistilBERT for its efficient training capabilities and redu
 
 ## Data Preprocessing
 
-### Handling Multilingual Content
+1. **Data Reading and Integration**:
+   - Reads email data from a CSV file.
+   - Merges 'Subject' and 'Message' columns into a unified 'Text' column for streamlined text processing.
 
-- **Translation**: Utilized `googletrans` for translating non-English text to English, ensuring uniform processing and analysis across different languages.
+2. **Label Encoding**:
+   - Converts categorical labels ('Spam' and 'Ham') into binary format (1 for 'spam', 0 for 'ham') to facilitate classification.
 
-### Tokenization and Cleaning
+3. **Data Cleaning and Handling**:
+   - Removes unnecessary columns like 'Date', 'Subject', and 'Message ID' to simplify the dataset.
+   - Handles missing values to ensure data completeness.
 
-- **Tokenization**: Employed DistilBERT's tokenizer to tokenize text efficiently, ensuring compatibility with model input requirements.
-- **Cleaning**: Removed non-alphanumeric characters, stopwords, and performed lemmatization to enhance data quality.
+4. **Text Preprocessing**:
+   - Utilized `googletrans` for translating non-English text to English, ensuring uniform processing and analysis across different languages.
+   - Cleans text by removing non-alphanumeric characters and other noise.
+   - Employed DistilBERT's tokenizer to tokenize text efficiently, ensuring compatibility with model input requirements.
+   - Removes stopwords and lemmatizes tokens for improved analysis.
 
 ### Data Loader
 
@@ -115,6 +102,14 @@ Implemented `DistilBERTDataset` class for handling input during model training a
 
 - Validated model performance on a separate test dataset to ensure generalizability and accuracy.
 - Evaluated metrics such as precision, recall, and F1-score to assess model effectiveness in spam detection.
+
+### Attention Masking
+
+During dataset preparation, each input sequence was tokenized and converted into an ID sequence. To ensure computational efficiency and handle varying sequence lengths, attention masks were applied during testing. These masks identify relevant tokens (set to 1) and irrelevant tokens (set to 0) during attention calculation.
+
+### Model Testing and Results
+
+Achieved an accuracy of 97% with a robust recall score, indicating effective spam detection with minimal false positives and negatives. Detailed error analysis included confusion matrices and tokenized misclassifications, improving model understanding and performance.
 
 ## Tools and Technologies Used
 
@@ -151,7 +146,13 @@ Implemented `DistilBERTDataset` class for handling input during model training a
 
 ## Conclusion
 
-Spam Detector Network project encompasses a comprehensive approach to building and deploying a spam detection system using advanced machine learning techniques. The integration with Node-RED enhances automation capabilities, making it suitable for real-time email spam detection and management.
+The Spam Detector Network project encompasses a comprehensive approach to building and deploying a spam detection system using advanced machine learning techniques. The integration with Node-RED enhances automation capabilities, making it suitable for real-time email spam detection and management.
+
+## Future Proposals
+
+- **Cloud Deployment**: Deploying the model on a cloud server using Docker containers for improved scalability and management.
+- **Big Data Handling**: Implementing Hadoop or Spark frameworks for handling large volumes of data and advanced result analysis.
+- **Mobile Application**: Developing a cross-platform mobile app using Flutter for local model execution or Swift for optimized iOS performance.
 
 ## Authors
 
