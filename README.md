@@ -1,4 +1,4 @@
-# Spam Detector Network
+# Spam Detector Network 
 
 ## Table of Contents
 1. [Project Description](#project-description)
